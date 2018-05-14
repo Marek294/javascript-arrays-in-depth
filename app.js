@@ -1,59 +1,43 @@
 var items = [1, 2, 3, 4, 5];
-var filtered = items.filter(x => x > 3);
+var hasThree = items.some(x => x === 3);
 
-console.log(filtered);
+console.log(hasThree);
 
-var people = [
+var tasks = [
     {
-        name: 'Shane',
-        pets: ['cat', 'dog']
+        title: 'Do laundry',
+        completed: true
     },
     {
-        name: 'Simon',
-        pets: ['horse']
+        title: 'Feed the cat',
+        completed: false
     },
     {
-        name: 'Ben'
-    }
-]
-
-filtered = people.filter(x => x.pets)
-
-console.log(filtered);
-
-const lessons = [
-    {
-        title: 'Javascript Arrays in Depth - join',
-        views: 960,
-        tags: ['array', 'join']
-    },
-    {
-        title: 'Javascript Arrays in Depth - concat',
-        views: 1050,
-        tags: ['array', 'concat']
-    },
-    {
-        title: 'Javascript Arrays in Depth - slice',
-        views: 2503,
-        tags: ['array', 'slice']
-    },
-    {
-        title: 'Javascript Functions in Depth - bind',
-        views: 2500,
-        tags: ['functions', 'bind']
+       title: 'Watch the array lessons on egghead.io',
+       completed: true 
     }
 ];
 
-var minViews = 1000;
-var searchTerm = 'array';
+var list = document.querySelector('.task-list');
+list.classList.add(
+    tasks.some(task => task.completed === false)
+        ? 'task-list--uncompleted'
+        : 'task-list--completed'
+)
 
-filtered = lessons
-    .filter(x => x.tags.indexOf(searchTerm) > -1)
-    .filter(x => x.views > minViews)
-    .sort((a, b) => b.views - a.views)
-    .map(x => ` <li>${x.title}</li>`)
-    .join('\n');
+list.innerHTML = tasks
+    .map(x => x.completed ? `<s>${x.title}</s>` : x.title)
+    .map(x => `<li>${x}</li>`)
+    .join('');
 
-console.log(`<ul>
-${filtered}
-</ul>`);
+
+function addTask(title) {
+    if(tasks.some(task => task.title === title)) {
+        return;
+    }
+    tasks.push({ title, completed: false});
+}
+
+addTask('Feed the cat');
+
+console.log(tasks);
