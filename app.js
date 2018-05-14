@@ -1,29 +1,21 @@
-var items = [1, 2];
+var names = ['Shane', 'Alan', 'Osbourne'];
 
-var newItems = items.concat([3, 4], [5, 6, 7]);
+console.log(names.join(' '));
 
-console.log(newItems);
-
-var people = [
-    {
-        name: 'Shane'
-    },
-    {
-        name: 'Sally'
-    }
+var help = [
+    'Usage',
+    '   foo-app <input'
 ];
 
-var people2 = [
-    {
-        name: 'Simon'
-    },
-    {
-        name: 'Ben'
-    }
-];
+if(process.argv[2] === 'help') {
+    console.log(help.join('\n'));
+}
 
-people
-    .concat(people2)
-    .forEach(function (person) {
-        console.log(person.name);
-    })
+var name = 'shane osbourne';
+
+const upper = name
+    .split(' ')
+    .map(x => x.charAt(0).toUpperCase() + x.slice(1))
+    .join(' ')
+
+console.log(upper);
