@@ -1,35 +1,29 @@
-var person = { name: 'Shane' };
-var items = [1, person];
-var copy = items.slice();
+var items = ['Shane', 'Kittie', 'Sally', 'Isaac'];
 
-copy[1].name = 'Sally';
+items.sort((a, b) => a.length - b.length);
 
-console.log(items, copy);
+console.log(items);
 
-items = [1, 2, 3, 4, 5, 6, 7, 8];
-copy = items.slice(1, -1);
+var lessons = [
+    {
+        title: 'Javascript Array methods in depth - concat',
+        views: 1000
+    },
+    {
+        title: 'Javascript Array methods in depth - slice',
+        views: 1050
+    },
+    {
+        title: 'Javascript Array methods in depth - join',
+        views: 1025
+    }
+];
 
-console.log(copy);
+var list = lessons
+    .sort((a, b) => b.views - a. views)
+    .map(x => `     <li>${x.title} ${x.views}</li>`)
+    .join('\n');
 
-var person = {
-    name: 'shane-osbourne'
-};
+var output = `<ul>\n${list}\n</ul>`;
 
-var filters = {
-    'deslugify': x => x.replace('-', ' '),
-    'uppercase': x => x.toUpperCase()
-}
-
-var input = 'name | deslugify | uppercase';
-
-var sections = input.split('|').map(x => x.trim());
-var ref = person[sections[0]];
-var output = sections.slice(1)
-    .reduce((prev, next) => {
-        if(filters[next]) {
-            return filters[next].call(null, prev);
-        }
-        return prev;
-    }, ref);
-
-console.log(output);
+console.log(output)
