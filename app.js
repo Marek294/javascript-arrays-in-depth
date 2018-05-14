@@ -1,21 +1,43 @@
-var names = ['Shane', 'Alan', 'Osbourne'];
+var family = ['Shane', 'Kittie', 'Sally', 'Isaac'];
+var kittieExists = family.indexOf('Kittie') > -1;
 
-console.log(names.join(' '));
+console.log(kittieExists);
 
-var help = [
-    'Usage',
-    '   foo-app <input'
-];
+console.log(family.indexOf('Kittie', 2));
 
-if(process.argv[2] === 'help') {
-    console.log(help.join('\n'));
+var shane = {
+    name: 'Shane'
 }
 
-var name = 'shane osbourne';
+var sally = {
+    name: 'Sally'
+}
 
-const upper = name
-    .split(' ')
-    .map(x => x.charAt(0).toUpperCase() + x.slice(1))
-    .join(' ')
+var kittie = {
+    name: 'Kittie'
+}
 
-console.log(upper);
+family = [shane, sally, kittie];
+
+console.log(family.indexOf(kittie));
+
+var whitelist = ['.css', '.js'];
+
+var events = [
+    {
+        file: 'css/core.css'
+    },
+    {
+        file: 'js/app.js'
+    },
+    {
+        file: 'index.html'
+    }
+];
+
+var filtered = events.filter(event => {
+    var ext = require('path').extname(event.file);
+    return whitelist.indexOf(ext) > -1;
+})
+
+console.log(filtered);
