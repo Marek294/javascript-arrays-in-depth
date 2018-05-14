@@ -1,43 +1,17 @@
-var items = [1, 2, 3, 4, 5];
-var hasThree = items.some(x => x === 3);
+const input  = document.querySelector('#input');
+const button = document.querySelector('#button');
+const list   = document.querySelector('#list');
 
-console.log(hasThree);
+const pets   = [];
 
-var tasks = [
-    {
-        title: 'Do laundry',
-        completed: true
-    },
-    {
-        title: 'Feed the cat',
-        completed: false
-    },
-    {
-       title: 'Watch the array lessons on egghead.io',
-       completed: true 
+button.addEventListener("click", function (evt) {
+    if (input.value.length > 0) {
+        pets.push(input.value);
+        input.value = "";
+        render();
     }
-];
+});
 
-var list = document.querySelector('.task-list');
-list.classList.add(
-    tasks.some(task => task.completed === false)
-        ? 'task-list--uncompleted'
-        : 'task-list--completed'
-)
-
-list.innerHTML = tasks
-    .map(x => x.completed ? `<s>${x.title}</s>` : x.title)
-    .map(x => `<li>${x}</li>`)
-    .join('');
-
-
-function addTask(title) {
-    if(tasks.some(task => task.title === title)) {
-        return;
-    }
-    tasks.push({ title, completed: false});
+function render () {
+    list.innerHTML = pets.map(x => `<li>${x}</li>`).join('');
 }
-
-addTask('Feed the cat');
-
-console.log(tasks);
