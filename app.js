@@ -1,43 +1,35 @@
-var family = ['Shane', 'Kittie', 'Sally', 'Isaac'];
-var kittieExists = family.indexOf('Kittie') > -1;
+var person = { name: 'Shane' };
+var items = [1, person];
+var copy = items.slice();
 
-console.log(kittieExists);
+copy[1].name = 'Sally';
 
-console.log(family.indexOf('Kittie', 2));
+console.log(items, copy);
 
-var shane = {
-    name: 'Shane'
+items = [1, 2, 3, 4, 5, 6, 7, 8];
+copy = items.slice(1, -1);
+
+console.log(copy);
+
+var person = {
+    name: 'shane-osbourne'
+};
+
+var filters = {
+    'deslugify': x => x.replace('-', ' '),
+    'uppercase': x => x.toUpperCase()
 }
 
-var sally = {
-    name: 'Sally'
-}
+var input = 'name | deslugify | uppercase';
 
-var kittie = {
-    name: 'Kittie'
-}
+var sections = input.split('|').map(x => x.trim());
+var ref = person[sections[0]];
+var output = sections.slice(1)
+    .reduce((prev, next) => {
+        if(filters[next]) {
+            return filters[next].call(null, prev);
+        }
+        return prev;
+    }, ref);
 
-family = [shane, sally, kittie];
-
-console.log(family.indexOf(kittie));
-
-var whitelist = ['.css', '.js'];
-
-var events = [
-    {
-        file: 'css/core.css'
-    },
-    {
-        file: 'js/app.js'
-    },
-    {
-        file: 'index.html'
-    }
-];
-
-var filtered = events.filter(event => {
-    var ext = require('path').extname(event.file);
-    return whitelist.indexOf(ext) > -1;
-})
-
-console.log(filtered);
+console.log(output);
