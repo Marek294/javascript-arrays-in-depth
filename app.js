@@ -1,44 +1,46 @@
-const items = ['01', '02', '04', '05'];
-const result = items.every(x => typeof x === 'string');
+const items = [1, 2, 3, 4, 5];
+const sum = items.reduce((prev, item) => prev + item);
 
-console.log(result);
+console.log(sum);
 
-const fields = [
+const albums = [
     {
-        field: 'email',
-        value: 'shane@example.com',
-        errors: []
+        title: 'Holiday in Spain',
+        images: ['01.jpg', '02.jpg']
     },
     {
-        field: 'name',
-        value: '',
-        errors: ['No name provided']
+        title: 'House renovation',
+        images: ['03.jpg', '04.jpg', '05.jpg']
     }
 ];
 
-const isValid = fields.every(x => x.errors.length === 0)
+const numImages = albums.reduce((prev,album) => {
+    return prev + album.images.length
+}, 0);
 
-console.log(isValid);
+console.log(numImages);
 
-const videos = [
+const images = albums.reduce((prev,album) => {
+    return prev.concat(album.images);
+}, []);
+
+console.log(images);
+
+const users = [
     {
-        title: 'Array methods in depth: concat',
-        length: 310,
-        viewed: 310
+        id: '01',
+        name: 'Shane'
     },
     {
-        title: 'Array methods in depth: join',
-        length: 420,
-        viewed: 360
+        id: '02',
+        name: 'Sally'
     }
 ];
 
-function complete(x) {
-    return x.viewed === x.length;
-}
+const newUsers = users.reduce((obj, user) => {
+    obj[user.id] = user
 
-const isComplete = videos.every(complete);
-const completed = videos.filter(complete);
+    return obj;
+}, {});
 
-console.log(isComplete);
-console.log(completed);
+console.log(newUsers);
