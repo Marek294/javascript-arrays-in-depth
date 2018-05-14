@@ -1,29 +1,59 @@
-var items = ['Shane', 'Kittie', 'Sally', 'Isaac'];
+var items = [1, 2, 3, 4, 5];
+var filtered = items.filter(x => x > 3);
 
-items.sort((a, b) => a.length - b.length);
+console.log(filtered);
 
-console.log(items);
-
-var lessons = [
+var people = [
     {
-        title: 'Javascript Array methods in depth - concat',
-        views: 1000
+        name: 'Shane',
+        pets: ['cat', 'dog']
     },
     {
-        title: 'Javascript Array methods in depth - slice',
-        views: 1050
+        name: 'Simon',
+        pets: ['horse']
     },
     {
-        title: 'Javascript Array methods in depth - join',
-        views: 1025
+        name: 'Ben'
+    }
+]
+
+filtered = people.filter(x => x.pets)
+
+console.log(filtered);
+
+const lessons = [
+    {
+        title: 'Javascript Arrays in Depth - join',
+        views: 960,
+        tags: ['array', 'join']
+    },
+    {
+        title: 'Javascript Arrays in Depth - concat',
+        views: 1050,
+        tags: ['array', 'concat']
+    },
+    {
+        title: 'Javascript Arrays in Depth - slice',
+        views: 2503,
+        tags: ['array', 'slice']
+    },
+    {
+        title: 'Javascript Functions in Depth - bind',
+        views: 2500,
+        tags: ['functions', 'bind']
     }
 ];
 
-var list = lessons
-    .sort((a, b) => b.views - a. views)
-    .map(x => `     <li>${x.title} ${x.views}</li>`)
+var minViews = 1000;
+var searchTerm = 'array';
+
+filtered = lessons
+    .filter(x => x.tags.indexOf(searchTerm) > -1)
+    .filter(x => x.views > minViews)
+    .sort((a, b) => b.views - a.views)
+    .map(x => ` <li>${x.title}</li>`)
     .join('\n');
 
-var output = `<ul>\n${list}\n</ul>`;
-
-console.log(output)
+console.log(`<ul>
+${filtered}
+</ul>`);
