@@ -1,64 +1,44 @@
-let items = ['1', '2', '3', '4', '5'];
+const items = ['01', '02', '04', '05'];
+const result = items.every(x => typeof x === 'string');
 
-let mapped = items.map(item => {
-    return Number(item);
-})
+console.log(result);
 
-console.log(mapped);
-
-items = ["Shane", "Sally"];
-mapped = items.map(firstName => { 
-    return { firstName }
-});
-
-console.log(mapped);
-
-items = [
+const fields = [
     {
-        firstName: 'Shane',
-        lastName: 'Osbourne'
+        field: 'email',
+        value: 'shane@example.com',
+        errors: []
     },
     {
-        firstName: 'Sally',
-        lastName: 'Osbourne'
+        field: 'name',
+        value: '',
+        errors: ['No name provided']
     }
 ];
 
-mapped.map = items.map(x => {
-    return {
-        firstName: x.firstName,
-        lastName: x.lastName,
-        fullName: x.firstName + ' ' + x.lastName
-    }
-});
+const isValid = fields.every(x => x.errors.length === 0)
 
-console.log(mapped);
+console.log(isValid);
 
-items = [
+const videos = [
     {
-        active: true,
-        firstname: 'Shane',
-        lastname: 'Osbourne'
+        title: 'Array methods in depth: concat',
+        length: 310,
+        viewed: 310
     },
     {
-        active: true,
-        firstname: 'Sally',
-        lastname: 'Osbourne'
-    },
-    {
-        active: false,
-        firstname: 'Ben',
-        lastname: 'Barker'
+        title: 'Array methods in depth: join',
+        length: 420,
+        viewed: 360
     }
 ];
 
-mapped = items
-    .filter(x => x.active)
-    .map(x => x.firstname);
-
-function createHtmlList(items) {
-    const listElements = items.map(x => ` <li>${x}</li>`).join('');
-    return `<ul>${listElements}</ul>`;
+function complete(x) {
+    return x.viewed === x.length;
 }
 
-console.log(createHtmlList(mapped))
+const isComplete = videos.every(complete);
+const completed = videos.filter(complete);
+
+console.log(isComplete);
+console.log(completed);
